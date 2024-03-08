@@ -1,17 +1,21 @@
 import pyautogui
 import sys
 import time
+import pyperclip  # Added for clipboard operations
 
 # Function to type text with case sensitivity
 def type_text_sensitively(text):
     for char in text:
-        if char.isupper():
+        if char in ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ý', 'Č', 'Ď', 'Ľ', 'Ň', 'Ŕ', 'Š', 'Ť', 'Ž', 'á', 'é', 'í', 'ó', 'ú', 'ý', 'č', 'ď', 'ľ', 'ň', 'ŕ', 'š', 'ť', 'ž']:
+            pyperclip.copy(char)  # Copy the special character to clipboard
+            pyautogui.hotkey('ctrl', 'v')  # Paste the character
+            time.sleep(0.05)  # Short delay to ensure the character is pasted before moving on
+        elif char.isupper():
             pyautogui.keyDown('shift')  # Hold Shift for uppercase
             pyautogui.press(char.lower())  # Type the character in lowercase
             pyautogui.keyUp('shift')  # Release Shift
         elif char.isdigit():
-            # For digits, just press them as some keyboards require Shift to type numbers
-            pyautogui.press(char)
+            pyautogui.press(char)  # For digits, just press them
         else:
             pyautogui.press(char)  # Type the character as is
 
