@@ -4,17 +4,23 @@ const app = express();
 const port = 3000;
 
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.static('public')); // Serve static files from 'public' directory
 
 app.post('/submit-text', (req, res) => {
     const { text } = req.body;
     console.log(`Received text: ${text}`);
-    // Replace automate_input.py with the path to your actual Python script
-    exec(`python automate_input.py "${text.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
+    
+    // Use the full path for Python executable and the script
+    const pythonPath = "C:/Users/adaml/AppData/Local/Programs/Python/Python312/python.exe";
+    const scriptPath = "c:/Users/adaml/Desktop/Cursor_projects/buse_text/automate_input.py";
+    
+    exec(`"${pythonPath}" "${scriptPath}" "${text.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            return res.status(500).send('Failed to submit text');
+            return res.status(500).send({message: 'Failed to submit text', error: stderr});
         }
-        res.send({ message: 'Text submitted successfully' });
+        console.log(`stdout: ${stdout}`);
+        res.send({ message: 'Text submitted successfully', output: stdout });
     });
 });
 

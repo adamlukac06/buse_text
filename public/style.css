@@ -1,0 +1,49 @@
+
+body {
+    font-family: Bahnschrift, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #1d1c1c;
+    color: #ffffff; /* White text color for general text */
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Make sure padding does not affect the total width */
+    -webkit-appearance: none; /* Disable iOS and Safari input styles */
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Disable auto-correct, auto-capitalize, and spell check */
+input[type="text"], textarea {
+    -webkit-autocorrect: off;
+    autocorrect: off;
+    -webkit-autocapitalize: none;
+    autocapitalize: none;
+    spellcheck: false;
+}
